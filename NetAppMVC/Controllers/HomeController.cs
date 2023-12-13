@@ -22,5 +22,15 @@ namespace NetAppMVC.Controllers
             ViewBag.Message = "Your contact page.";
             return View();
         }
+
+        public ActionResult PartialViewDemo()
+        {
+            return PartialView();
+        }
+
+        public ActionResult SignIn()
+        {
+            return View();
+        }
     }
 }
