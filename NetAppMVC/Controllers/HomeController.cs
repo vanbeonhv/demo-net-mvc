@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Web.Mvc;
+using DataAccess;
 using Microsoft.Ajax.Utilities;
 using NetAppMVC.Models;
 
@@ -55,6 +56,7 @@ namespace NetAppMVC.Controllers
         
         public JsonResult Login(SignInRequestData result)
         {
+            var connectionCheck = new DBHelper().GetConnection();
             var responseData = new ResponseData();
             if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
             {
@@ -66,6 +68,7 @@ namespace NetAppMVC.Controllers
             else
             {
                 responseData.Message = "Login success!";
+                
             }
             
             return Json(responseData, JsonRequestBehavior.AllowGet);
