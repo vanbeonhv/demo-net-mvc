@@ -20,7 +20,7 @@
                             </div>
 
                             <div class="row justify-content-center my-3 px-3">
-                                <button class="btn-block btn-color">Sign in</button>
+                                <button class="btn-block btn-color btn-login">Sign in</button>
                             </div>
 
                         </div>
@@ -38,3 +38,27 @@
         </div>
     </div>
 </div>
+
+<script >
+    $(document).ready(function() {
+    console.log("test");
+        $(".btn-login").click(() => {
+           const email = $("#email").val();
+           const password = $("#psw").val();
+           const signInData = {
+               email,
+               password
+           }
+           $.ajax({
+            type: "POST",
+            contentType: "application/json",
+            url: "/Home/SignIn",
+            data: JSON.stringify(signInData),
+            dataType: "json",
+            success: ((result) => {
+                alert(result.Message)
+            })
+           })
+        })
+    })
+</script>

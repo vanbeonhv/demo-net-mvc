@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAppMVC", "NetAppMVC\NetAppMVC.csproj", "{4EB19D0B-BB69-40EC-A4AD-BF8C43F6D121}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{4EB19D0B-BB69-40EC-A4AD-BF8C43F6D121}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4EB19D0B-BB69-40EC-A4AD-BF8C43F6D121}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4EB19D0B-BB69-40EC-A4AD-BF8C43F6D121}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

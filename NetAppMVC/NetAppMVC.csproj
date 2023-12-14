@@ -121,6 +121,8 @@
             <DependentUpon>Global.asax</DependentUpon>
         </Compile>
         <Compile Include="Models\DataObj.cs" />
+        <Compile Include="Models\ResponseData.cs" />
+        <Compile Include="Models\SignInRequestData.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
     <ItemGroup>
@@ -147,7 +149,7 @@
         <Content Include="Scripts\jquery.validate.unobtrusive.min.js"/>
         <Content Include="Scripts\modernizr-2.8.3.js"/>
         <Content Include="Views\Home\PartialViewDemo.cshtml" />
-        <Content Include="Views\Home\SignIn.cshtml" />
+        <Content Include="Views\Home\SignInView.cshtml" />
         <Content Include="Web.config"/>
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>
@@ -178,6 +180,12 @@
         <None Include="packages.config"/>
         <Content Include="Scripts\jquery-3.3.1.slim.min.map"/>
         <Content Include="Scripts\jquery-3.3.1.min.map"/>
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\DataAccess\DataAccess.csproj">
+        <Project>{1563dcfd-5da3-4ea7-8daa-9960ad69fefd}</Project>
+        <Name>DataAccess</Name>
+      </ProjectReference>
     </ItemGroup>
     <PropertyGroup>
         <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

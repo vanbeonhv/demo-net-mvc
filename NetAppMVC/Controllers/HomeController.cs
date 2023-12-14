@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
+using NetAppMVC.Models;
 
 namespace NetAppMVC.Controllers
 {
@@ -28,9 +30,46 @@ namespace NetAppMVC.Controllers
             return PartialView();
         }
 
-        public ActionResult SignIn()
+        public ActionResult SignInView()
         {
             return View();
         }
+
+        public JsonResult SignIn(SignInRequestData result)
+        {
+            var responseData = new ResponseData();
+            if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
+            {
+                responseData.Message = "Sign In value invalid";
+            } else if (result.Password.Length < 6)
+            {
+                responseData.Message = "Password must be at least 6 characters";
+            }
+            else
+            {
+                responseData.Message = "Sign in success!";
+            }
+            
+            return Json(responseData, JsonRequestBehavior.AllowGet);
+        }
+        
+        public JsonResult Login(SignInRequestData result)
+        {
+            var responseData = new ResponseData();
+            if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
+            {
+                responseData.Message = "Sign In value invalid";
+            } else if (result.Password.Length < 6)
+            {
+                responseData.Message = "Password must be at least 6 characters";
+            }
+            else
+            {
+                responseData.Message = "Login success!";
+            }
+            
+            return Json(responseData, JsonRequestBehavior.AllowGet);
+        }
+        
     }
 }
