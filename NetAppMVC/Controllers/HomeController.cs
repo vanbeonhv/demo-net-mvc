@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web.Mvc;
 using DataAccess;
+using DataAccess.DataAccessObjectImpl;
 using Microsoft.Ajax.Utilities;
 using NetAppMVC.Models;
 
@@ -42,7 +43,8 @@ namespace NetAppMVC.Controllers
             if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
             {
                 responseData.Message = "Sign In value invalid";
-            } else if (result.Password.Length < 6)
+            }
+            else if (result.Password.Length < 6)
             {
                 responseData.Message = "Password must be at least 6 characters";
             }
@@ -50,29 +52,29 @@ namespace NetAppMVC.Controllers
             {
                 responseData.Message = "Sign in success!";
             }
-            
+
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
-        
+
         public JsonResult Login(SignInRequestData result)
         {
-            var connectionCheck = new DBHelper().GetConnection();
             var responseData = new ResponseData();
             if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
             {
                 responseData.Message = "Sign In value invalid";
-            } else if (result.Password.Length < 6)
+            }
+            else if (result.Password.Length < 6)
             {
                 responseData.Message = "Password must be at least 6 characters";
             }
             else
             {
                 responseData.Message = "Login success!";
-                
+                var user = new UserDaoImpl().GetUser();
+                var i = 1;
             }
-            
+
             return Json(responseData, JsonRequestBehavior.AllowGet);
         }
-        
     }
 }

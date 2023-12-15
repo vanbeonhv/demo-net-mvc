@@ -11,25 +11,25 @@
                     <div class="row justify-content-center my-auto">
                         <div class="col-md-8 col-10 my-5">
                             <h6 class="msg-info">Please login to your account</h6>
-  
+
                             <div class="form-group">
                                 <label class="form-control-label text-muted">Username</label>
-                                <input type="text" id="email" name="email"  class="form-control">
+                                <input type="text" id="email" name="email" class="form-control">
                             </div>
-  
+
                             <div class="form-group">
                                 <label class="form-control-label text-muted">Password</label>
-                                <input type="password" id="psw" name="psw"  class="form-control">
+                                <input type="password" id="psw" name="psw" class="form-control">
                             </div>
-  
+
                             <div class="row justify-content-center my-3 px-3">
                                 <button class="btn-block btn-color btn-login">Login</button>
                             </div>
-  
                         </div>
                     </div>
                     <div class="bottom text-center mb-5">
-                        <p class="sm-text mx-auto mb-3">Don't have an account?
+                        <p class="sm-text mx-auto mb-3">
+                            Don't have an account?
                             <button class="btn btn-white ml-2">
                                 @Html.ActionLink("Create new", "SignInView", "Home")
                             </button>
@@ -41,27 +41,27 @@
     </div>
 </div>
 
-
-<script >
-    $(document).ready(function() {
-    console.log("test");
+<script>
+    $(document).ready(function () {
+        console.log("test");
         $(".btn-login").click(() => {
-           const email = $("#email").val();
-           const password = $("#psw").val();
-           const signInData = {
-               email,
-               password
-           }
-           $.ajax({
-            type: "POST",
-            contentType: "application/json",
-            url: "/Home/SignIn",
-            data: JSON.stringify(signInData),
-            dataType: "json",
-            success: ((result) => {
-                alert(result.Message)
+            const email = $("#email").val();
+            const password = $("#psw").val();
+            const signInData = {
+                email,
+                password
+            }
+            $.ajax({
+                type: "POST",
+                contentType: "application/json",
+                url: "/Home/Login",
+                data: JSON.stringify(signInData),
+                dataType: "json",
+                success: ((result) => {
+                    alert(result.Message)
+                    window.location.href = "/Home/Index"
+                })
             })
-           })
         })
     })
 </script>
