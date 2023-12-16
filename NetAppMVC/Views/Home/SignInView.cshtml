@@ -1,13 +1,13 @@
 @model dynamic
 
-<div class="jumbotron">
+<div class="jumbotron main">
     <div class="container px-4 py-5 mx-auto">
         <div class="card card0">
-            <div class="d-flex flex-lg-row flex-column-reverse">
+            <div class="d-flex flex-lg-row flex-column-reverse flex-item">
                 <div class="card card1">
-                    <div class="row justify-content-center my-auto">
-                        <div class="col-md-8 col-10 my-5">
-                            <h6 class="msg-info">Please create a new account</h6>
+                    <div class=" justify-content-center my-auto">
+                        <div class="col-10 my-5">
+                            <h3 class="msg-info">Please create a new account</h3>
 
                             <div class="form-group">
                                 <label class="form-control-label text-muted">Username</label>
@@ -57,8 +57,11 @@
             dataType: "json",
             success: ((result) => {
                 alert(result.Message)
+                if (result.Status === 201) {
+                window.location.href = "/"
+                }
             })
-           })
+           }) 
         })
     })
 </script>

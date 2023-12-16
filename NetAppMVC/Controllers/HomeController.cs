@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using DataAccess;
 using DataAccess.DataAccessObjectImpl;
+using DataAccess.DataObject;
 using Microsoft.Ajax.Utilities;
 using NetAppMVC.Models;
 
@@ -27,6 +30,11 @@ namespace NetAppMVC.Controllers
             return View();
         }
 
+        public ActionResult Welcome()
+        {
+            return View();
+        }
+
         public ActionResult PartialViewDemo()
         {
             return PartialView();
@@ -42,7 +50,7 @@ namespace NetAppMVC.Controllers
             var responseData = new ResponseData();
             if (string.IsNullOrEmpty(result.Email) || string.IsNullOrEmpty(result.Password))
             {
-                responseData.Message = "Sign In value invalid";
+                responseData.Message = "Email and password can't be blank";
             }
             else if (result.Password.Length < 6)
             {
@@ -50,7 +58,20 @@ namespace NetAppMVC.Controllers
             }
             else
             {
-                responseData.Message = "Sign in success!";
+                HttpStatusCode httpCodeRes = new UserDaoImpl().AddNewUser(result.Email, result.Password);
+                responseData.Status = (int)httpCodeRes;
+                switch (httpCodeRes)
+                {
+                    case HttpStatusCode.Created:
+                        responseData.Message = "Sign in successfully";
+                        break;
+                    case HttpStatusCode.Conflict:
+                        responseData.Message = "Email already exits";
+                        break;
+                    default:
+                        responseData.Message = "Error";
+                        break;
+                }
             }
 
             return Json(responseData, JsonRequestBehavior.AllowGet);
@@ -69,9 +90,11 @@ namespace NetAppMVC.Controllers
             }
             else
             {
-                responseData.Message = "Login success!";
-                var user = new UserDaoImpl().GetUser();
-                var i = 1;
+                int httpStatusReturn = new UserDaoImpl().Login(result.Email, result.Password);
+                responseData.Status = httpStatusReturn;
+                responseData.Message = (httpStatusReturn == (int)HttpStatusCode.OK)
+                    ? "Login success!"
+                    : "Invalid email or password!";
             }
 
             return Json(responseData, JsonRequestBehavior.AllowGet);

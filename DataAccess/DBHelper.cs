@@ -1,7 +1,6 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.IO;
 
 namespace DataAccess
 {
@@ -12,7 +11,7 @@ namespace DataAccess
             SqlConnection sqlConnection = null;
             try
             {
-                var connectionString = File.ReadAllText("./appSetting.json");
+                var connectionString = "Data Source=SQL5112.site4now.net;Initial Catalog=db_aa2e52_mydb;User Id=db_aa2e52_mydb_admin;Password=Linhtinh123@";
 
                 sqlConnection = new SqlConnection(connectionString);
                 if (sqlConnection.State == ConnectionState.Closed)
@@ -22,7 +21,8 @@ namespace DataAccess
             }
             catch (Exception ex)
             {
-                sqlConnection.Dispose();
+                sqlConnection?.Dispose();
+                Console.WriteLine(ex);
             }
 
             return sqlConnection;

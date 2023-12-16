@@ -150,6 +150,7 @@
         <Content Include="Scripts\modernizr-2.8.3.js"/>
         <Content Include="Views\Home\PartialViewDemo.cshtml" />
         <Content Include="Views\Home\SignInView.cshtml" />
+        <Content Include="Views\Home\Welcome.cshtml" />
         <Content Include="Web.config"/>
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>

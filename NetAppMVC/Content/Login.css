@@ -41,6 +41,8 @@ button:focus {
 .card1 {
     width: 50%;
     padding: 40px 30px 10px 30px;
+    border: 1px solid #D500F9;
+    border-radius: 8px;
 }
 
 .card2 {
@@ -155,4 +157,13 @@ a:hover {
         margin-top: 50px !important;
         margin-bottom: 50px !important;
     }
+}
+
+.flex-item {
+    display: flex;
+    justify-content: center;
+}
+
+.main {
+    margin-top: 96px;
 }
