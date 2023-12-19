@@ -10,10 +10,19 @@ namespace NetAppMVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             
             routes.MapRoute(
+                name: "Member",
+                url: "Member/{action}/{id}",
+                defaults: new { controller = "Member", action = "Index", id = UrlParameter.Optional }
+            );
+            
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+            
+
+
         }
     }
 }

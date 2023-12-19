@@ -12,5 +12,6 @@ namespace DataAccess.DataAccessObject
     {
         int Login(string email, string password);
         HttpStatusCode AddNewUser(string email, string password);
+        List<User> GetListUser();
     }
 }

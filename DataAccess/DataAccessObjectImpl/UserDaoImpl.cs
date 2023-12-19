@@ -2,11 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Net;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccess.DataAccessObject;
 using DataAccess.DataObject;
 
@@ -59,6 +55,38 @@ namespace DataAccess.DataAccessObjectImpl
                     return HttpStatusCode.Conflict;
                 }
 
+                throw;
+            }
+        }
+
+        public List<User> GetListUser()
+        {
+            var userList = new List<User>();
+            try
+            {
+                var con = DbHelper.GetConnection();
+                var cmd = new SqlCommand("get_list_user", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                var data = cmd.ExecuteReader();
+
+                while (data.Read())
+                {
+                    var user = new User()
+                    {
+                        Id = (Guid)data["id"],
+                        Email = data["email"].ToString(),
+                        Password = data["password"].ToString(),
+                        Address = data["address"].ToString(),
+                        Age = Convert.ToInt32(data["age"]),
+                    };
+                    userList.Add(user);
+                }
+
+                return userList;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
                 throw;
             }
         }

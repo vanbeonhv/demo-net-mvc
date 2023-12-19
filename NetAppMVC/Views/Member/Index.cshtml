@@ -1,0 +1,27 @@
+<div class="jumbotron main">
+    <h2 class="text-center text-info">Member page</h2>
+    <div id="UsersPartialView">this is partial view</div>
+</div>
+
+<script >
+    $(document).ready(() => {
+        LoadPartialView();
+    });
+    
+    function LoadPartialView() {
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/Member/UsersPartialView",
+            // data: JSON.stringify({}),
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                $("#UsersPartialView").html(data);
+            },
+            error: function (e) {
+                console.log(e)
+            }
+        })
+    }
+</script>
