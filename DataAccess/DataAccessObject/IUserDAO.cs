@@ -11,5 +11,6 @@ namespace DataAccess.DataAccessObject
         HttpStatusCode AddNewUser(string email, string password);
         List<User> GetListUser();
         User GetUer(Guid id);
+        int UpdateUser(User user);
     }
 }

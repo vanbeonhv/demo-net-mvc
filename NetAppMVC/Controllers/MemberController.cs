@@ -30,9 +30,36 @@ namespace NetAppMVC.Controllers
             return PartialView(model);
         }
 
-        public ActionResult Edit()
+        public ActionResult Edit(Guid id)
         {
-            return View();
+            var model = new User();
+            try
+            {
+                model = new UserDaoImpl().GetUer(id);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return View(model);
+        }
+
+        public ActionResult EditResult(User user)
+        {
+            var result = 0;
+            try
+            {
+                result = new UserDaoImpl().UpdateUser(user);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Delete()

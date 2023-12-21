@@ -6831,4 +6831,12 @@ button.close {
     display: none !important;
   }
 }
+
+.edit-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
 /*# sourceMappingURL=bootstrap.css.map */

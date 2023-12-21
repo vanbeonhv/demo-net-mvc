@@ -35,6 +35,7 @@
     <Compile Include="DataAccessObjectImpl\UserDaoImpl.cs" />
     <Compile Include="DataAccessObject\IUserDAO.cs" />
     <Compile Include="DataObject\User.cs" />
+    <Compile Include="DataObject\UserRequest.cs" />
     <Compile Include="DBHelper.cs" />
   </ItemGroup>
   <ItemGroup>

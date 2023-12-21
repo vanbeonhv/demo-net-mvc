@@ -167,3 +167,9 @@ a:hover {
 .main {
     margin-top: 96px;
 }
+
+.edit-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

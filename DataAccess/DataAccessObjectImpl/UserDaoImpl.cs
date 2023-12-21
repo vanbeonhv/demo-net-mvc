@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
+using System.Runtime.InteropServices;
 using DataAccess.DataAccessObject;
 using DataAccess.DataObject;
 
@@ -118,6 +119,33 @@ namespace DataAccess.DataAccessObjectImpl
                 Console.WriteLine(e);
                 throw;
             }
+        }
+
+        public int UpdateUser(User user)
+        {
+            var res = 0;
+            try
+            {
+                var con = DbHelper.GetConnection();
+                var cmd = new SqlCommand("update_user", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", user.Id);
+                cmd.Parameters.AddWithValue("@password", user.Password);
+                cmd.Parameters.AddWithValue("@address", user.Address);
+                cmd.Parameters.Add("@responseCode", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                res = cmd.Parameters["@responseCode"].Value == DBNull.Value
+                    ? 0
+                    : Convert.ToInt32(cmd.Parameters["@responseCode"].Value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return res;
         }
     }
 }

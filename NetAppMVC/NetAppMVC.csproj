@@ -152,9 +152,9 @@
         <Content Include="Views\Home\PartialViewDemo.cshtml" />
         <Content Include="Views\Home\SignInView.cshtml" />
         <Content Include="Views\Home\Welcome.cshtml" />
-        <Content Include="Views\Member\Edit.cshtml" />
         <Content Include="Views\Member\Index.cshtml" />
         <Content Include="Views\Member\UsersPartialView.cshtml" />
+        <Content Include="Views\Member\Edit.cshtml" />
         <Content Include="Web.config"/>
         <Content Include="Web.Debug.config">
             <DependentUpon>Web.config</DependentUpon>
