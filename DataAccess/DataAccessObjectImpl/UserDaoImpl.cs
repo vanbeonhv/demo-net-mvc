@@ -90,5 +90,34 @@ namespace DataAccess.DataAccessObjectImpl
                 throw;
             }
         }
+
+        public User GetUer(Guid id)
+        {
+            var user = new User();
+            try
+            {
+                var con = DbHelper.GetConnection();
+                var cmd = new SqlCommand("get_user_by_id", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                var data = cmd.ExecuteReader();
+
+                while (data.Read())
+                {
+                    user.Id = (Guid)data["id"];
+                    user.Email = data["email"].ToString();
+                    user.Password = data["password"].ToString();
+                    user.Address = data["address"].ToString();
+                    user.Age = Convert.ToInt32(data["age"]);
+                }
+
+                return user;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 }
