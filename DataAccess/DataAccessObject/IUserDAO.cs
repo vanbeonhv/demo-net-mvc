@@ -12,5 +12,7 @@ namespace DataAccess.DataAccessObject
         List<User> GetListUser();
         User GetUer(Guid id);
         int UpdateUser(User user);
+        int RemoveUser(Guid id);
+        int AddNewUser(User user);
     }
 }

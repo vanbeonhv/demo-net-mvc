@@ -1,39 +1,69 @@
 @model DataAccess.DataObject.User
 @Layout = "~/Views/Shared/_Layout.cshtml";
+@ViewBag.Header = @ViewBag.ModeCode == 0 ? "Add new user" : "Edit user";
+@ViewBag.Title = @ViewBag.Header;
 
 <div class="jumbotron main edit-center">
     <div style="width: 30%">
-        <p>Email: @Model.Email</p>
+        <h2>@ViewBag.Header</h2>
+        <div class="form-group">
+                    <label for="EmailInput">Email</label>
+                    <input class="form-control" id="EmailInput" placeholder="Enter Email" value="@Model.Email">
+                </div>
         <div class="form-group">
             <label for="AddressInput">Address</label>
-            <input class="form-control" id="AddressInput" placeholder="Enter Address" value=@Model.Address>
+            <input class="form-control" id="AddressInput" placeholder="Enter Address" value="@Model.Address">
         </div>
         <div class="form-group">
             <label for="AgeInput">Age</label>
-            <input class="form-control" id="AgeInput" placeholder="Enter Age" value=@Model.Age>
+            <input class="form-control" id="AgeInput" type="number" placeholder="Enter Age" value="@Model.Age">
         </div>
         <button class="btn btn-primary">Submit</button>
     </div>
 </div>
 
 <script >
+    $(document).ready(() => {
+        // LoadPartialView();
+        const emailInput = $("#EmailInput");
+        @ViewBag.ModeCode === 0 ? emailInput.attr("disabled", false) : emailInput.attr("disabled", true)
+    });
+
     $(".btn").click(function () {
-        var address = $("#AddressInput").val();
-        var age = $("#AgeInput").val();
+        const email = $("#EmailInput").val();
+        const address = $("#AddressInput").val();
+        const age = $("#AgeInput").val();
+        
+        @ViewBag.ModeCode === 0 ? $.ajax({
+            url: "/Member/AddResult",
+            // type: "POST",
+            data: {
+                email: email,
+                address: address,
+                age: age,
+            },
+            success: function (responseData) {
+                alert(responseData.Message);
+                window.location.href = "/Member/Index";
+            },
+            error: function (responseData) {
+                alert(responseData.Message);
+            }
+        }) :
         $.ajax({
             url: "/Member/EditResult",
             // type: "POST",
             data: {
                 id: "@Model.Id",
-                email: "@Model.Email",
                 address: address,
                 age: age,
             },
-            success: function (data) {
-                alert(data);
+            success: function (responseData) {
+                alert(responseData.Message);
+                window.location.href = "/Member/Index";
             },
-            error: function (data) {
-                alert("Error");
+            error: function (responseData) {
+                alert(responseData.Message);
             }
         });
     });

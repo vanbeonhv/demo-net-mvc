@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net;
-using System.Runtime.InteropServices;
 using DataAccess.DataAccessObject;
 using DataAccess.DataObject;
 
@@ -123,20 +122,72 @@ namespace DataAccess.DataAccessObjectImpl
 
         public int UpdateUser(User user)
         {
-            var res = 0;
+            int res;
             try
             {
                 var con = DbHelper.GetConnection();
                 var cmd = new SqlCommand("update_user", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", user.Id);
-                cmd.Parameters.AddWithValue("@password", user.Password);
+                cmd.Parameters.AddWithValue("@age", user.Age);
                 cmd.Parameters.AddWithValue("@address", user.Address);
                 cmd.Parameters.Add("@responseCode", SqlDbType.Int).Direction = ParameterDirection.Output;
                 cmd.ExecuteNonQuery();
 
                 res = cmd.Parameters["@responseCode"].Value == DBNull.Value
-                    ? 0
+                    ? -55
+                    : Convert.ToInt32(cmd.Parameters["@responseCode"].Value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return res;
+        }
+
+        public int RemoveUser(Guid id)
+        {
+            int res;
+            try
+            {
+                var con = DbHelper.GetConnection();
+                var cmd = new SqlCommand("remove_user", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.Parameters.Add("@responseCode", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                res = cmd.Parameters["@responseCode"].Value == DBNull.Value
+                    ? -55
+                    : Convert.ToInt32(cmd.Parameters["@responseCode"].Value);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+            return res;
+        }
+
+        public int AddNewUser(User user)
+        {
+            int res;
+            try
+            {
+                var con = DbHelper.GetConnection();
+                var cmd = new SqlCommand("add_new_member", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@email", user.Email);
+                cmd.Parameters.AddWithValue("@address", user.Address);
+                cmd.Parameters.AddWithValue("@age", user.Age);
+                cmd.Parameters.Add("@responseCode", SqlDbType.Int).Direction = ParameterDirection.Output;
+                cmd.ExecuteNonQuery();
+
+                res = cmd.Parameters["@responseCode"].Value == DBNull.Value
+                    ? -88
                     : Convert.ToInt32(cmd.Parameters["@responseCode"].Value);
             }
             catch (Exception e)

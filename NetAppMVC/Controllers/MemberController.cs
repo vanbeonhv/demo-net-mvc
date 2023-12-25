@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Web.Mvc;
 using DataAccess.DataAccessObjectImpl;
 using DataAccess.DataObject;
+using NetAppMVC.Enum;
+using NetAppMVC.Models;
 
 namespace NetAppMVC.Controllers
 {
@@ -33,38 +35,100 @@ namespace NetAppMVC.Controllers
         public ActionResult Edit(Guid id)
         {
             var model = new User();
+            var modeCode = id != Guid.Empty ? ModeCode.Edit : ModeCode.Add;
             try
             {
-                model = new UserDaoImpl().GetUer(id);
+                model = id != Guid.Empty ? new UserDaoImpl().GetUer(id) : model;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-
+            ViewBag.ModeCode = (int)modeCode;
             return View(model);
         }
 
         public ActionResult EditResult(User user)
         {
-            var result = 0;
+            var result = new ResponseData();
             try
             {
-                result = new UserDaoImpl().UpdateUser(user);
+                result.Status = new UserDaoImpl().UpdateUser(user);
+                switch (result.Status)
+                {
+                    case 1:
+                        result.Message = "Update success";
+                        break;
+                    case -1:
+                        result.Message = "User Id not found";
+                        break;
+                    default:
+                        result.Message = "System error";
+                        break;
+                }
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                result.Status = -777;
+                result.Message = e.Message;
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        public ActionResult Delete()
+        // [HttpDelete]
+        public ActionResult DeleteResult(Guid id)
         {
-            return Json("Deleted");
+            var result = new ResponseData();
+            try
+            {
+                result.Status = new UserDaoImpl().RemoveUser(id);
+                switch (result.Status)
+                {
+                    case 1:
+                        result.Message = "Remove user success";
+                        break;
+                    case -1:
+                        result.Message = "User Id not found";
+                        break;
+                    default:
+                        result.Message = "System error";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                result.Status = -666;
+                result.Message = e.Message;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        
+        public ActionResult AddResult(User user)
+        {
+            var result = new ResponseData();
+            try
+            {
+                result.Status = new UserDaoImpl().AddNewUser(user);
+                switch (result.Status)
+                {
+                    case 1:
+                        result.Message = "Add user success";
+                        break;
+                    default:
+                        result.Message = "System error";
+                        break;
+                }
+            }
+            catch (Exception e)
+            {
+                result.Status = -666;
+                result.Message = e.Message;
+            }
+
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }
