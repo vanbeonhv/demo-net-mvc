@@ -1,6 +1,7 @@
 @model List<DataAccess.DataObject.User>
 <div>
     <a class="btn btn-success" href="@Url.Action("Edit", "Member", new {id = Guid.Empty})">Add</a>
+    <a class="btn btn-success" href="@Url.Action("GetData", "Member")">Get</a>
     <table class="table table-striped table-bordered table-hover">
         <caption>user list</caption>
         <thead>

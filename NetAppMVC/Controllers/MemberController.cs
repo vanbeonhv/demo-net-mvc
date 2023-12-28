@@ -5,6 +5,7 @@ using DataAccess.DataAccessObjectImpl;
 using DataAccess.DataObject;
 using NetAppMVC.Enum;
 using NetAppMVC.Models;
+using RestSharp;
 
 namespace NetAppMVC.Controllers
 {
@@ -45,6 +46,7 @@ namespace NetAppMVC.Controllers
                 Console.WriteLine(e);
                 throw;
             }
+
             ViewBag.ModeCode = (int)modeCode;
             return View(model);
         }
@@ -105,7 +107,7 @@ namespace NetAppMVC.Controllers
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
-        
+
         public ActionResult AddResult(User user)
         {
             var result = new ResponseData();
@@ -129,6 +131,33 @@ namespace NetAppMVC.Controllers
             }
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult GetData()
+        {
+            try
+            {
+                var options = new RestClientOptions("https://localhost:7180")
+                {
+                    MaxTimeout = -1,
+                };
+                var client = new RestClient(options);
+                var request = new RestRequest("/api/demo/get-data", Method.Post);
+                request.AddHeader("Content-Type", "application/json");
+                var body = @"{
+" + "\n" +
+                           @"    ""queryName"": ""string""
+" + "\n" +
+                           @"}";
+                request.AddStringBody(body, DataFormat.Json);
+                RestResponse response = await client.ExecuteAsync(request);
+                Console.WriteLine(response.Content);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

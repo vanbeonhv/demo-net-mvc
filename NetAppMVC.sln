@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAppMVC", "NetAppMVC\NetA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetAPI2", "NetAPI2\NetAPI2.csproj", "{D018BAEF-7987-4CB3-839E-2AAF407EAB6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1563DCFD-5DA3-4EA7-8DAA-9960AD69FEFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D018BAEF-7987-4CB3-839E-2AAF407EAB6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D018BAEF-7987-4CB3-839E-2AAF407EAB6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D018BAEF-7987-4CB3-839E-2AAF407EAB6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D018BAEF-7987-4CB3-839E-2AAF407EAB6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
